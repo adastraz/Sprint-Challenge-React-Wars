@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import axios from 'axios'
-
+import Names from './components/Names.js'
 const App = () => {
-  
-  const thisIsBS= [1,2,3,4,5]
 
-  const [people, setNames] = useState('')
+  const [people, setNames] = useState([])
 
   useEffect(() => {
     axios.get('https://swapi.co/api/people')
@@ -18,25 +16,19 @@ const App = () => {
         console.log(err)
       })
   },[])
-  console.log(people.length)
-  thisIsBS.map(x => {
-    console.log(x)
-  })
-  for(let i=0;i<people.length;i++){
-    console.log(people[i])
-  }
+  console.log(people)
 
-  const letsSee = () => {
-    for(let i=0;i<people.length;i++){
-      return (
-        <>{people[i].name}</>
-        )
-    }
-  }
+  // for(let i=0;i<people.length;i++){
+  //   console.log(people[i])
+  // }
   return (
     <div className="App">
       {
-        letsSee()
+        people.map(x => {
+          return(
+            <Names name={x}/>
+          )
+        })
       }
     </div>
   );
